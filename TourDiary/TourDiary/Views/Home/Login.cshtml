@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+<link rel="stylesheet" href="~/Styles/login.css" />
+<style>
+    #span__error{
+        color: red;
+        margin: auto;
+        display: block;
+        width: fit-content;
+    }
+</style>
+
+<section id="main">
+    <section>
+        <div id="div__login">
+            <div id="div__loginLottie"></div>
+        </div>
+    </section>
+    <section>
+        @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { id = "form__login"}))
+        {
+            <table>
+                <tr>
+                    <td>
+                        <div class="formItems">
+                            <div>
+                                <label for="username">Username</label>
+                            </div>
+                            <div>
+                                <input type="text" id="username" name="username" placeholder="Enter your username" autocomplete="new-username" onkeyup="validateLogin()" maxlength="50" />
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="formItems">
+                            <div>
+                                <label for="password">Password</label>
+                            </div>
+                            <div>
+                                <input type="password" id="password" name="password" placeholder="Password" autocomplete="new-password" onkeyup="validateLogin()" />
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="formItems">
+                            <div>
+                                <input type="submit" id="submit" value="Login" disabled />
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                @if(ViewBag.Error == "Error")
+                { 
+                    <tr>
+                        <td>
+                            <span id="span__error">
+                                <strong>Note: </strong>
+                                Please enter valid Username and Password.
+                            </span>
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+    </section>
+</section>
+
+<script src="~/Scripts/login.js"></script>

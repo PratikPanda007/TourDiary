@@ -1,0 +1,29 @@
+﻿@using TourDiary.Models;
+@using TourDiary.Controllers
+@using System.Security.Claims;
+
+@{ 
+    AuthorizeUser authUser = new AuthorizeUser();
+    User user = authUser.GetCurrentUser();
+    if(user != null && user.UserEmail != null && user.UserEmail != String.Empty)
+    {
+        <div style="font-size: 15px; color: #FFFFFF !important;">
+            <span class="btnAuth" id="helloTag">
+                @Html.ActionLink("Hello " + user.UserName + "!", String.Empty, String.Empty, routeValues: null, htmlAttributes: new { id = "nameHello"})
+            </span>
+            <button type="button" class="btn btn-outline-light me-2 btnAuth" style="font-size: 15px">
+                @Html.ActionLink("Logout", "SignOut", "Home")
+            </button>
+        </div>
+    }
+    else
+    {
+        <button type="button" class="btn btn-outline-light me-2 btnAuth" style="font-size: 15px">
+            @Html.ActionLink("Login", "Login", "Home", routeValues: null, htmlAttributes: new { id="loginLink1"})
+        </button>
+    }
+}
+
+<script>
+    console.log("_Authartial Called");
+</script>
