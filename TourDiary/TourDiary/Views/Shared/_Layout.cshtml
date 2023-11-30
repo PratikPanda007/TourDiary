@@ -12,6 +12,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <!-- Lottie Files -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js" ></script>
 </head>
@@ -33,30 +34,39 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     @*<li class="active"><a href="#">Link </a></li>*@
-                    @{ 
+                    @{
                         AuthorizeAdmin authAdmin = new AuthorizeAdmin();
                         if (authAdmin.isAdmin())
-                        { 
+                        {
                             <li><a href="/Home/About">Admin</a></li>
                         }
-                        else { 
+                        else
+                        {
                         }
                     }
-                    <li><a href="/Home/About">About Us</a></li>
-                    <li><a href="/Home/Contact">Contact Us</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">One more separated link</a></li>
+                    @{
+                        AuthorizeUser authUser = new AuthorizeUser();
+                        User user = authUser.GetCurrentUser();
+                        if (user != null && user.UserEmail != null && user.UserEmail != String.Empty)
+                        {
+                            <li>@Html.ActionLink("Tour Management", "TourManagement", "Tour")</li>
+                        }
+                    }
+                   @*<li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tour Management <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>*@
+                            <li><a href="/Home/About">About Us</a></li>
+                            <li><a href="/Home/Contact">Contact Us</a></li>
                         </ul>
-                    </li>
-                </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         @Html.Partial("_AuthPartial")
@@ -71,10 +81,17 @@
     
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+        <nav class="navbar navbar-inverse navbar-fixed-bottom">
+            <div class="container-fluid">
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        @*<li class="active"><a href="#">Link </a></li>*@
+                        <li class=""><a href="#">&copy; Copywrights Reserved.</a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

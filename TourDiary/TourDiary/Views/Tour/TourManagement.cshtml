@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "TourManagement";
+}
+<style>
+    #div__cards {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: space-evenly;
+    }
+    .card-img-top{
+        width: 100%;
+    }
+</style>
+<h2>TourManagement</h2>
+@ViewBag.UserName
+
+<div id="div__main">
+    <div id="div__cards">
+        <!-- Add Tour -->
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="~/Assets/images/farming1.jpg" alt="Tour Details">
+            <div class="card-body">
+                <h5 class="card-title">Add Tour Details</h5>
+                <p class="card-text">Here you can add your tour details.</p>
+                @Html.ActionLink("ADD Tours | +", "AddTour", "Tour", new { @class = "btn btn-primary"})
+            </div>
+        </div>
+
+        <!-- Get All Tour Details -->
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="~/Assets/images/farming2.jpg" alt="All Tour Details">
+            <div class="card-body">
+                <h5 class="card-title">See All Tour Details</h5>
+                <p class="card-text">Here you can see all of your logged tour details.</p>
+                @Html.ActionLink("See Tours | 👀", "AllTours", "Tour", new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+</div>

@@ -149,15 +149,21 @@
     <Compile Include="Controllers\AuthorizeAdmin.cs" />
     <Compile Include="Controllers\AuthorizeUser.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TourController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\DAUtils.cs" />
     <Compile Include="Models\TextEncrypeDecrypt.cs" />
+    <Compile Include="Models\TourData.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\images\farming4.jpg" />
+    <Content Include="Assets\images\farming2.jpg" />
+    <Content Include="Assets\images\farming1.jpg" />
+    <Content Include="Assets\images\farming3.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -198,6 +204,9 @@
     <Content Include="Views\Shared\_AuthPartial.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Unauthorize.cshtml" />
+    <Content Include="Views\Tour\TourManagement.cshtml" />
+    <Content Include="Views\Tour\AddTour.cshtml" />
+    <Content Include="Views\Tour\AllTours.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

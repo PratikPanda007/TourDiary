@@ -54,8 +54,13 @@ namespace TourDiary.Helper
 
                         user.UserEmail = Convert.ToString(dr["UserName"]);
                         user.UserName = Convert.ToString(dr["UserName"]);
+                        user.FirstName = Convert.ToString(dr["FirstName"]);
+                        user.LastName = Convert.ToString(dr["LastName"]);
+                        user.FullName = Convert.ToString(dr["FirstName"]) + " " + Convert.ToString(dr["LastName"]);
                         user.UserPassword = TextEncrypeDecrypt.DecryptString(aesKey, Convert.ToString(dr["UserPassword"]));
                         user.UserRole = Convert.ToString(dr["RoleId"]);
+                        user.DesignationID = Convert.ToInt32(dr["DesignationID"]);
+                        user.DesignationName = Convert.ToString(dr["DesignationName"]);
                     }
                 }
             }
@@ -77,6 +82,24 @@ namespace TourDiary.Helper
             com.CommandType = CommandType.StoredProcedure;
             com.Parameters.AddWithValue("@UserName", UserName);
             com.Parameters.AddWithValue("@NewPassword", TextEncrypeDecrypt.EncryptString(aesKey, NewPassword));
+
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            DataSet ds = new DataSet();
+
+            con.Open();
+            da.Fill(ds);
+            con.Close();
+        }
+
+        // Add Tour Data
+        public void AddTour(TourData td)
+        {
+            Connection();
+
+            SqlCommand com = new SqlCommand("AddTourData", con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@UserName", td.UserName);
 
             SqlDataAdapter da = new SqlDataAdapter(com);
             DataTable dt = new DataTable();

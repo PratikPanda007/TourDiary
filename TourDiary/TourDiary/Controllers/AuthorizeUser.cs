@@ -31,13 +31,21 @@ namespace TourDiary.Controllers
             {
                 user.UserEmail = HttpContext.Current.Request.Cookies["userInfo"]["email"];
                 user.UserName = HttpContext.Current.Request.Cookies["userInfo"]["UserName"];
+                user.FirstName = HttpContext.Current.Request.Cookies["userInfo"]["FirstName"];
+                user.LastName = HttpContext.Current.Request.Cookies["userInfo"]["LastName"];
+                user.FullName = HttpContext.Current.Request.Cookies["userInfo"]["FullName"];
                 user.UserRole = HttpContext.Current.Request.Cookies["userInfo"]["UserRole"];
+                user.DesignationName = HttpContext.Current.Request.Cookies["userInfo"]["DesignationName"];
             }
             else
             {
                 user.UserEmail = String.Empty; 
                 user.UserName = String.Empty;
+                user.FirstName = String.Empty;
+                user.LastName = String.Empty;
+                user.FullName = String.Empty;
                 user.UserRole = String.Empty;
+                user.DesignationName = String.Empty;
             }
 
             return user;
@@ -47,8 +55,12 @@ namespace TourDiary.Controllers
         {
             HttpCookie userInfo = new HttpCookie("userInfo");
             userInfo["UserName"] = user.UserName;
+            userInfo["FirstName"] = user.FirstName;
+            userInfo["LastName"] = user.LastName;
+            userInfo["FullName"] = user.FullName;
             userInfo["email"] = user.UserEmail;
             userInfo["UserRole"] = user.UserRole;
+            userInfo["DesignationName"] = user.DesignationName;
             userInfo.Expires.Add(new TimeSpan(0, 1, 0));
             HttpContext.Current.Response.Cookies.Add(userInfo);
         }

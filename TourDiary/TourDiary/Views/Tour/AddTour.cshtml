@@ -1,0 +1,223 @@
+﻿
+@{
+    ViewBag.Title = "AddTour";
+}
+<style>
+    #form__login{
+        margin-bottom: 50px;
+    }
+    .div__tableRow {
+        display: flex;
+        gap: 50px;
+    }
+    .div__tableRow_first {
+        display: flex;
+        gap: 50px;
+        width: 70%;
+        margin: 0px auto;
+    }
+    #table__addTour{
+        width: 70%;
+        margin: 0px auto;
+    }
+</style>
+@{
+    var userVar = (TourDiary.Models.User)ViewData["UserDetails"];
+}
+<h2>AddTour</h2>
+@using (Html.BeginForm("AddTour", "Tour", FormMethod.Post, new { id = "form__login" }))
+{
+    if (userVar != null)
+    {
+        <div class="div__tableRow_first">
+            <div class="form-group">
+                <label for="userName">User Name</label>
+                <input type="text" class="form-control" id="userName" value="@Html.Raw(userVar.UserName)" name="userName" aria-describedby="emailHelp" placeholder="Enter your username" readonly>
+                @*<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>*@
+            </div>
+            <div class="form-group">
+                <label for="designation">Designation</label>
+                <input type="text" class="form-control" id="designation" value="@Html.Raw(userVar.DesignationName)" name="designation" placeholder="Designation" readonly>
+            </div>
+        </div>
+        <table id="table__addTour">
+            <tr>
+                <td colspan="3">
+                    <div class="div__tableRow">
+                        <div class="form-group">
+                            <label for="headQuarters">Head Quarters</label>
+                            <input type="text" class="form-control" id="headQuarters" name="headQuarters" placeholder="Head Quarters" onkeyup="validate()">
+                        </div>
+                        <div class="form-group">
+                            <label for="actualPay">Actual Pay</label>
+                            <input type="text" class="form-control" id="actualPay" name="actualPay" placeholder="Actual Pay" onkeyup="validate()">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <fieldset>
+                        <legend>Departure</legend>
+                        <div class="div__tableRow">
+                            <div class="form-group">
+                                <label for="dep_station">Station</label>
+                                <input type="text" class="form-control" id="dep_station" name="dep_station" placeholder="Station" onkeyup="validate()">
+                            </div>
+                            <div class="form-group">
+                                <label for="dep_date">Date</label>
+                                <input type="date" class="form-control" id="dep_date" name="dep_date" placeholder="Date" onkeyup="validate()">
+                            </div>
+                            <div class="form-group">
+                                <label for="dep_hour">Hour</label>
+                                <input type="time" class="form-control" id="dep_hour" name="dep_hour" placeholder="Hour" onkeyup="validate()" onchange="validate()">
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <fieldset>
+                        <legend>Arrival</legend>
+                        <div class="div__tableRow">
+                            <div class="form-group">
+                                <label for="arv_station">Station</label>
+                                <input type="text" class="form-control" id="arv_station" name="arv_station" placeholder="Station" onkeyup="validate()">
+                            </div>
+                            <div class="form-group">
+                                <label for="arv_date">Date</label>
+                                <input type="date" class="form-control" id="arv_date" name="arv_date" placeholder="Date" onkeyup="validate()" onchange="validate()">
+                            </div>
+                            <div class="form-group">
+                                <label for="arv_hour">Hour</label>
+                                <input type="time" class="form-control" id="arv_hour" name="arv_hour" placeholder="Hour" onkeyup="validate()">
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="div__tableRow">
+                        <div class="form-group">
+                            <label for="journeyPurose">Purpose of journey</label>
+                            <input type="text" class="form-control" id="journeyPurose" name="journeyPurose" placeholder="Purpose of journey" onkeyup="validate()">
+                        </div>
+                        <div class="form-group">
+                            <label for="jounreyKind">Kind of journey</label>
+                            <input type="text" class="form-control" id="jounreyKind" name="jounreyKind" placeholder="Kind of journey" onkeyup="validate()">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <fieldset>
+                        <legend>Mileage by Road</legend>
+                        <div class="div__tableRow">
+                            <div class="form-group">
+                                <label for="road__miles">No. of Miles</label>
+                                <input type="text" class="form-control" id="road__miles" name="road__miles" placeholder="No. of Miles" onkeyup="validate()">
+                            </div>
+                            <div class="form-group">
+                                <label for="road__rate">Rate</label>
+                                <input type="number" class="form-control" id="road__rate" name="road__rate" placeholder="Rate" min="1" onkeyup="validate()" onchange="validate()">
+                            </div>
+                            <div class="form-group">
+                                <label for="road_amount">Amount</label>
+                                <input type="number" class="form-control" id="road_amount" name="road_amount" min="1" placeholder="Amount" onkeyup="validate()" onchange="validate()">
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <fieldset>
+                        <legend>Daily Allowance</legend>
+                        <div class="div__tableRow">
+                            <div class="form-group">
+                                <label for="noOfDays">No. of Days</label>
+                                <input type="number" class="form-control" id="noOfDays" name="noOfDays" min="1" placeholder="No. of Days" onkeyup="validate()" onchange="validate()">
+                            </div>
+                            <div class="form-group">
+                                <label for="allowance__rate">Rate</label>
+                                <input type="number" class="form-control" id="allowance__rate" name="allowance__rate" placeholder="Rate" min="1" onkeyup="validate()" onchange="validate()">
+                            </div>
+                            <div class="form-group">
+                                <label for="allowance_amount">Amount</label>
+                                <input type="number" class="form-control" id="allowance_amount" name="allowance_amount" min="1" placeholder="Amount" onkeyup="validate()" onchange="validate()">
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <fieldset>
+                        <legend>Actual Expenses</legend>
+                        <div class="div__tableRow">
+                            <div class="form-group">
+                                <label for="expense_Particulars">Particulars</label>
+                                <input type="number" class="form-control" id="expense_Particulars" name="expense_Particulars" placeholder="Particulars" min="1" onkeyup="validate()" onchange="validate()">
+                            </div>
+                            <div class="form-group">
+                                <label for="expense_amount">Amount</label>
+                                <input type="number" class="form-control" id="expense_amount" name="expense_amount" min="1" placeholder="Amount" onkeyup="validate()" onchange="validate()">
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div class="form-group">
+                        <button type="submit" id="btn__addTour" class="btn btn-primary pull-right" disabled>Submit</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    }
+}
+
+<script>
+    function validate() {
+        var userName = document.getElementById("userName");
+
+        var headQuarters = document.getElementById("headQuarters").value;
+        var actualPay = document.getElementById("actualPay").value;
+
+        var dep_station = document.getElementById("dep_station").value;
+        var dep_date = document.getElementById("dep_date").value;
+        var dep_hour = document.getElementById("dep_hour").value;
+
+        var arv_station = document.getElementById("arv_station").value;
+        var arv_date = document.getElementById("arv_date").value;
+        var arv_hour = document.getElementById("arv_hour").value;
+
+        var journeyPurose = document.getElementById("journeyPurose").value;
+        var jounreyKind = document.getElementById("jounreyKind").value;
+
+        var road__miles = document.getElementById("road__miles").value;
+        var road__rate = document.getElementById("road__rate").value;
+        var road_amount = document.getElementById("road_amount").value;
+
+        var noOfDays = document.getElementById("noOfDays").value;
+        var allowance__rate = document.getElementById("allowance__rate").value;
+        var allowance_amount = document.getElementById("allowance_amount").value;
+
+        var expense_Particulars = document.getElementById("expense_Particulars").value;
+        var expense_amount = document.getElementById("expense_amount").value;
+
+        if (headQuarters == "" || actualPay == "" || dep_station == "" || dep_date == "" || dep_hour == "" || arv_station == "" || arv_date == "" || arv_hour == "" || journeyPurose == "" || jounreyKind == "" ||
+            road__miles == "" || road__rate == "" || road_amount == "" || noOfDays == "" || allowance__rate == "" || allowance_amount == "" ||
+            expense_Particulars == "" || expense_amount == "") {
+            console.log("190 if");
+            $("#btn__addTour").prop("disabled", true);
+        } else {
+            console.log("192 else");
+            $("#btn__addTour").prop("disabled", false);
+        }
+    }
+</script>
